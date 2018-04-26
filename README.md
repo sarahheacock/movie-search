@@ -3,6 +3,7 @@
 ```
   git clone https://github.com/sarahheacock/movie-search.git
   cd movie-search
+  npm install
   npm run start:dev
 ```
 
