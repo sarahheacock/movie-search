@@ -1,0 +1,45 @@
+@import './input.scss';
+@import "./movieList.scss";
+@import "./movie.scss";
+
+body {
+  margin:0;
+  padding:0;
+  position: relative;
+  font-family: sans-serif;
+}
+
+.container-fluid{
+    margin: 0px;
+    padding: 0px;
+    background-color: WhiteSmoke;
+    position: block;
+    min-height: 100vh;
+}
+
+.my-modal {
+  font-size: 150%;
+}
+
+.modal-title {
+  font-size: 160%;
+}
+
+.modal-image {
+  padding-bottom: 3%;
+  text-align: center;
+}
+
+.btn-danger {
+  font-size: 150%;
+}
+
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0px 10px;
+}
+
+.btn {
+  margin: 0px;
+}

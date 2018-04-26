@@ -1,0 +1,51 @@
+.border-top {
+    border-style: double;
+    border-width: 0px 0px 6px 0px;
+    border-color: white;
+}
+
+.border {
+    /* padding: 40px 30px 40px 30px;
+    min-height: 100%; */
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(245,245,245);
+    border-color: rgba(245,245,245,0.8);
+}
+
+header {
+    background-image: url(https://images.pexels.com/photos/33129/popcorn-movie-party-entertainment.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-size: cover;
+    background-position: center top;
+    height: 50vh;
+    background-attachment: fixed;
+    padding: 0px;
+    margin: 0px;
+
+    border-style: dotted;
+    border-width: 12px;
+    border-color: transparent;
+
+    h1 {
+      font-size: 400%;
+      color: White;
+    }
+
+    .lable {
+      color: White;
+      font-size: 160%;
+    }
+
+    .my-row {
+      font-size: 150%;
+      margin-bottom: 1%;
+    }
+}
+
+
+.header-content {
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 2%;
+    background-color: rgba(55,55,55,0.6);
+}

@@ -1,0 +1,4 @@
+node_modules
+dist/*.js
+dist/*.css
+src/actions/config.js
