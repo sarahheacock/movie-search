@@ -5,8 +5,6 @@
 }
 
 .border {
-    /* padding: 40px 30px 40px 30px;
-    min-height: 100%; */
     border-style: solid;
     border-width: 2px;
     border-color: rgb(245,245,245);
@@ -29,11 +27,13 @@ header {
     h1 {
       font-size: 400%;
       color: White;
+      text-align: center;
+      padding-bottom: 1%;
     }
 
     .lable {
       color: White;
-      font-size: 160%;
+      font-size: 140%;
     }
 
     .my-row {
@@ -44,8 +44,12 @@ header {
 
 
 .header-content {
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-bottom: 2%;
-    background-color: rgba(55,55,55,0.6);
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 2%;
+  background-color: rgba(55,55,55,0.6);
+}
+
+.search-icon {
+  width: 1em;
 }

@@ -9,9 +9,9 @@ import MovieModal from '../components/MovieModal.js';
 
 const mapStateToProps = state => ({ movies: state.movies })
 const mapDispatchToProps = dispatch => ({
-  getMoreMovieInfo: id => dispatch(getMoreMovieInfo(id)),
-  updateFocus: obj => dispatch(updateFocus(obj)),
-  updateMovieImage: obj => dispatch(updateMovieImage(obj)),
+  getMoreMovieInfo: id => dispatch(getMoreMovieInfo(id)), // makes api call for specific movie
+  updateFocus: obj => dispatch(updateFocus(obj)), // updates which movie is in modal
+  updateMovieImage: obj => dispatch(updateMovieImage(obj)), // updates Poster key
 })
 
 class MovieList extends React.Component {
@@ -23,21 +23,24 @@ class MovieList extends React.Component {
   }
 
   handleClose = (e) => {
-    this.props.updateFocus({Title: ''})
+    // modal closes if movies.focused.Title is undefined
+    this.props.updateFocus({});
   }
 
   handleImageError = (e) => {
+    // updates movie.list[num].Poster or movies.focused.Poster
+    // with a default image if the image does not load
     const num = parseInt(e.target.id, 10);
     this.props.updateMovieImage(num);
-    console.log(num);
   }
 
   render(){
     return (
       <div className="main">
-        <div className="flex-container">
+        <div>
           {(this.props.movies.list.length) ?
-            this.props.movies.list.map((movie, i) => (
+            <div className="flex-container">
+            {this.props.movies.list.map((movie, i) => (
               <Movie
                 handleImageError={this.handleImageError}
                 key={movie.imdbID}
@@ -48,11 +51,16 @@ class MovieList extends React.Component {
                 index={i}
                 getMoreMovieInfo={this.getInfo}
               />
-            )):
+            ))}
+            </div>:
             <h1 className="text-center">{this.props.movies.message}</h1>
           }
         </div>
-        <MovieModal focused={this.props.movies.focused} handleClose={this.handleClose}/>
+        <MovieModal
+          focused={this.props.movies.focused}
+          handleClose={this.handleClose}
+          handleImageError={this.handleImageError}
+        />
       </div>
     )
   }
@@ -75,5 +83,7 @@ MovieList.propTypes = {
     focused: PropTypes.object.isRequired,
     message: PropTypes.string.isRequired
   }).isRequired,
-  getMoreMovieInfo: PropTypes.func.isRequired
+  getMoreMovieInfo: PropTypes.func.isRequired,
+  updateFocus: PropTypes.func.isRequired,
+  updateMovieImage: PropTypes.func.isRequired
 }

@@ -1,6 +1,5 @@
 import * as inputActions from '../actionTypes/input.js';
 
-// const movieState = {}
 
 export default function input(state={}, action) {
   switch(action.type) {
@@ -10,13 +9,6 @@ export default function input(state={}, action) {
         ...action.input
       }
 
-    case inputActions.UPDATE_INPUT_HISTORY:
-      // const suggestedYears = ;
-      // const suggestedTitles = ;
-
-      return {
-        ...state
-      }
 
     default:
       return state

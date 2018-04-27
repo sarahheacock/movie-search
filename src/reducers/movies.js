@@ -6,18 +6,28 @@ const movieState = {}
 export default function movies(state=movieState, action) {
   switch(action.type) {
     case movieActions.UPDATE_MOVIE_IMAGE:
-      const movies = state.list.map((movie, i) => {
-        if(i === action.index){
-          return {...movie, Poster: tempPoster}
+      // id > -1 if movie from list's image did not load
+      if(action.index > -1){
+        const movies = state.list.map((movie, i) => {
+          if(i === action.index){
+            return {...movie, Poster: tempPoster}
+          }
+          return movie;
+        })
+
+        return {
+          ...state,
+          list: movies
         }
-        return movie;
-      })
+      }
 
-      console.log(movies)
-
+      // id === -1 if Poster from state.focused did not load
       return {
         ...state,
-        list: movies
+        focused: {
+          ...state.focused,
+          Poster: tempPoster
+        }
       }
 
     case movieActions.UPDATE_MOVIE_LIST:

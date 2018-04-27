@@ -2,14 +2,13 @@ import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { updateInput, updateInputHistory } from '../actions/input.js';
+import { updateInput } from '../actions/input.js';
 import { searchForMovies } from '../actions/movies.js';
 import { Row, Col, ControlLabel, FormGroup, FormControl } from 'react-bootstrap';
 
 const mapStateToProps = state => ({ input: state.input })
 const mapDispatchToProps = dispatch => ({
   updateInput: input => dispatch(updateInput(input)),
-  updateInputHistory: input => dispatch(updateInputHistory(input)),
   searchForMovies: input => dispatch(searchForMovies(input))
 })
 
@@ -32,35 +31,27 @@ class Input extends React.Component {
 
   render(){
     const { title, year } = this.props.input;
-    console.log(this.props.input);
 
     return (
       <header>
-        <div className="">
-          <div className="header-content border">
-              <h1>IMDB Search</h1>
-              <Row className="my-row">
-                <Col componentClass={ControlLabel} sm={2} className="lable">
-                  Title:
-                </Col>
-                <Col sm={10}>
-                  <FormGroup bsSize="large">
-                    <FormControl type="text" name="title" value={title} onChange={this.onInputChange} />
-                  </FormGroup>
-                </Col>
-              </Row>
+        <div className="header-content border">
+          <h1>IMDB Search <img className="search-icon" src="/magnifier.svg"/></h1>
 
-              <Row className="my-row">
-                <Col componentClass={ControlLabel} sm={2} className="lable">
-                  Year:
-                </Col>
-                <Col sm={10}>
-                  <FormGroup bsSize="large">
-                    <FormControl type="text" name="year" value={year} onChange={this.onInputChange} />
-                  </FormGroup>
-                </Col>
-              </Row>
-          </div>
+          <Row className="my-row">
+            <Col sm={6}>
+              <div className="lable">Title:</div>
+              <FormGroup bsSize="large">
+                <FormControl type="text" name="title" value={title} onChange={this.onInputChange} />
+              </FormGroup>
+            </Col>
+            <Col sm={6}>
+              <div className="lable">Year:</div>
+              <FormGroup bsSize="large">
+                <FormControl type="text" name="year" value={year} onChange={this.onInputChange} />
+              </FormGroup>
+            </Col>
+          </Row>
+
         </div>
       </header>
     )
@@ -73,5 +64,10 @@ export default connect(
 )(Input);
 
 Input.propTypes = {
-
+  input: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired
+  }).isRequired,
+  updateInput: PropTypes.func.isRequired,
+  searchForMovies: PropTypes.func.isRequired
 }

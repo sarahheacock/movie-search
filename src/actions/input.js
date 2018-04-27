@@ -7,9 +7,4 @@ export const updateInput = (input) => {
   }
 }
 
-export const updateInputHistory = (input) => {
-  return {
-    type: inputActions.UPDATE_INPUT_HISTORY,
-    input: input
-  }
-}
+// middleware to update sessionStorage would go here -->
