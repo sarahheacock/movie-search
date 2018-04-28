@@ -9,7 +9,15 @@ const Movie = (props) => {
     <div className="item">
       <div className="movie-content">
         <div className="text-center">
-          <h3 className="movie-title">{props.title}</h3>
+          <h3 className="movie-title">
+            {props.title}
+            <br />
+            <small>
+            ({props.year})
+            <br />
+            <a href={`https://www.imdb.com/title/${props.id}`}>IMDB</a>
+            </small>
+          </h3>
           <div className="image-container">
             <img
               className="image"

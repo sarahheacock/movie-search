@@ -66,7 +66,7 @@ class Input extends React.Component {
           }
           <div className="text-center">
             <button onClick={this.toggle} className="red-button">
-              {(this.props.favorites) ? "Search": <span>View Favorite <b>{this.props.length}</b></span>}
+              {(this.props.favorites) ? "Search": <span>My Favorite <b>{this.props.length}</b></span>}
             </button>
           </div>
         </div>
