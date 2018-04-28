@@ -3,6 +3,8 @@
 @import "./movie.scss";
 @import "./modal.scss";
 
+$red: #D80027;
+
 body {
   margin:0;
   padding:0;
@@ -18,16 +20,25 @@ body {
     min-height: 100vh;
 }
 
-.btn-danger {
-  font-size: 150%;
-}
-
 .main {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0px 10px;
 }
 
-.btn {
-  margin: 0px;
+button:focus {
+  outline:0;
+}
+
+.red-button {
+  font-size: 150%;
+  padding: 12px 17px;
+  background-color: $red;
+  color: white;
+  border-width: 0px;
+  border-radius: 10%;
+}
+
+.red-button:hover {
+  background-color: darken($red, 5%);
 }

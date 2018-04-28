@@ -23,12 +23,22 @@ const input = (sessionStorage.input) ?
     year: ''
   };
 
+const favoritesList = (localStorage.favorites) ?
+  JSON.parse(localStorage.favorites).list:
+  [];
+
 const store = createStore(reducers, {
   input: input,
   movies: {
     list: [],
     focused: {},
+    favorites: [],
+    visible: false,
     message: 'Search for your favorite movie!'
+  },
+  favorites: {
+    list: favoritesList,
+    visible: false
   }
 }, applyMiddleware(thunk))
 
@@ -39,17 +49,30 @@ const store = createStore(reducers, {
 // this would allow 'saveState' to only be called when the input
 // actually changes rather than after every state change
 
-const saveState = (state) => {
+const saveInputState = (state) => {
   try {
-    const serializedState = JSON.stringify({title: state.input.title, year: state.input.year});
-    sessionStorage.setItem('input', serializedState);
+    const serializedInputState = JSON.stringify({title: state.input.title, year: state.input.year});
+    sessionStorage.setItem('input', serializedInputState);
   }
   catch(err){
     console.log(err);
   }
 };
 
-store.subscribe(() => { saveState(store.getState()); });
+const saveFavoritesState = (state) => {
+  try {
+    const serializedInputState = JSON.stringify({list: state.favorites.list});
+    localStorage.setItem('favorites', serializedInputState);
+  }
+  catch(err){
+    console.log(err);
+  }
+};
+
+store.subscribe(() => {
+  saveInputState(store.getState());
+  saveFavoritesState(store.getState());
+});
 
 // ==================RENDER======================================================
 render(

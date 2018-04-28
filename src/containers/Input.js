@@ -4,12 +4,18 @@ import PropTypes from 'prop-types';
 
 import { updateInput } from '../actions/input.js';
 import { searchForMovies } from '../actions/movies.js';
-import { Row, Col, ControlLabel, FormGroup, FormControl } from 'react-bootstrap';
+import { toggleVisible } from '../actions/favorites.js';
+import { Row, Col, ControlLabel, FormGroup, FormControl, Button } from 'react-bootstrap';
 
-const mapStateToProps = state => ({ input: state.input })
+const mapStateToProps = state => ({
+  input: state.input,
+  favorites: state.favorites.visible,
+  length: state.favorites.list.length
+})
 const mapDispatchToProps = dispatch => ({
   updateInput: input => dispatch(updateInput(input)),
-  searchForMovies: input => dispatch(searchForMovies(input))
+  searchForMovies: input => dispatch(searchForMovies(input)),
+  toggleVisible: value => dispatch(toggleVisible(value))
 })
 
 class Input extends React.Component {
@@ -29,6 +35,10 @@ class Input extends React.Component {
     this.props.searchForMovies({...this.props.input, [e.target.name]: e.target.value});
   }
 
+  toggle = (e) => {
+    this.props.toggleVisible(!this.props.favorites);
+  }
+
   render(){
     const { title, year } = this.props.input;
 
@@ -37,21 +47,28 @@ class Input extends React.Component {
         <div className="header-content border">
           <h1>IMDB Search <img className="search-icon" src="/magnifier.svg"/></h1>
 
-          <Row className="my-row">
-            <Col sm={6}>
-              <div className="lable">Title:</div>
-              <FormGroup bsSize="large">
-                <FormControl type="text" name="title" value={title} onChange={this.onInputChange} />
-              </FormGroup>
-            </Col>
-            <Col sm={6}>
-              <div className="lable">Year:</div>
-              <FormGroup bsSize="large">
-                <FormControl type="text" name="year" value={year} onChange={this.onInputChange} />
-              </FormGroup>
-            </Col>
-          </Row>
-
+          {(!this.props.favorites) ?
+            <Row className="my-row">
+              <Col sm={6}>
+                <div className="lable">Title:</div>
+                <FormGroup bsSize="large">
+                  <FormControl type="text" name="title" value={title} onChange={this.onInputChange} />
+                </FormGroup>
+              </Col>
+              <Col sm={6}>
+                <div className="lable">Year:</div>
+                <FormGroup bsSize="large">
+                  <FormControl type="text" name="year" value={year} onChange={this.onInputChange} />
+                </FormGroup>
+              </Col>
+            </Row>:
+            null
+          }
+          <div className="text-center">
+            <button onClick={this.toggle} className="red-button">
+              {(this.props.favorites) ? "Search": <span>View Favorite <b>{this.props.length}</b></span>}
+            </button>
+          </div>
         </div>
       </header>
     )
@@ -69,5 +86,8 @@ Input.propTypes = {
     year: PropTypes.string.isRequired
   }).isRequired,
   updateInput: PropTypes.func.isRequired,
-  searchForMovies: PropTypes.func.isRequired
+  searchForMovies: PropTypes.func.isRequired,
+  toggleVisible: PropTypes.func.isRequired,
+  favorites: PropTypes.bool.isRequired,
+  length: PropTypes.number.isRequired
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Row, Col } from 'react-bootstrap';
 
+import Heart from './Heart.js';
+
 const MovieModal = (props) => {
   return (
     <div>
@@ -32,14 +34,22 @@ const MovieModal = (props) => {
                   </Row>
               })}
             </div>
+            <div className="text-center">
+              <Heart
+                liked={props.favorite}
+                index={-1}
+                handleFavoriteButton={props.handleFavoriteButton}
+              />
+            </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={props.handleClose} bsStyle="danger">Close</Button>
+            <button className="red-button" onClick={props.handleClose}>
+              Close
+            </button>
           </Modal.Footer>
         </Modal>:
         null
       }
-
     </div>
   )
 }
@@ -48,5 +58,7 @@ export default MovieModal;
 
 MovieModal.propTypes = {
   focused: PropTypes.object.isRequired,
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
+  favorite: PropTypes.bool.isRequired,
+  handleFavoriteButton: PropTypes.func.isRequired
 }
